@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ce3p5eyhno3cn" path="res://assets/tileset/Spritesheet/spritesheet_tiles.png" id="1_tadml"]
 [ext_resource type="Script" path="res://scenes/_debug/Player_test.gd" id="2_sdt6n"]
 [ext_resource type="Texture2D" uid="uid://dx2nw0i6by5ny" path="res://assets/amogus.png" id="2_xi0t5"]
+[ext_resource type="Script" path="res://scenes/_debug/Coin.gd" id="4_66j7a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c8kh7"]
 texture = ExtResource("1_tadml")
@@ -397,9 +398,6 @@ size = Vector2(53, 69)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdvpu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vx6s4"]
-radius = 31.8277
-
 [node name="LevelTest" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -421,18 +419,9 @@ position = Vector2(1, -22.5)
 scale = Vector2(0.216, 0.257692)
 texture = ExtResource("2_xi0t5")
 
-[node name="Pickable" type="RigidBody2D" parent="."]
+[node name="Pickable" type="Area2D" parent="."]
 position = Vector2(778, 515)
-collision_layer = 2
-collision_mask = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Pickable"]
-
-[node name="Area2D" type="Area2D" parent="Pickable"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable/Area2D"]
-shape = SubResource("CircleShape2D_jdvpu")
+script = ExtResource("4_66j7a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable"]
-shape = SubResource("CircleShape2D_vx6s4")
+shape = SubResource("CircleShape2D_jdvpu")
