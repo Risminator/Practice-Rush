@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://oa3jr5dow84r"]
+
+[ext_resource type="Texture2D" uid="uid://blbpn7uji5ycv" path="res://assets/temp/Yellow.png" id="1_nacug"]
+[ext_resource type="TileSet" uid="uid://bjltml1nn5u2d" path="res://resources/tilemap.tres" id="2_x0ir6"]
+[ext_resource type="PackedScene" uid="uid://c2tc4yovjsigv" path="res://scenes/player_test.tscn" id="3_1bl2l"]
+[ext_resource type="PackedScene" uid="uid://feiknu0iud4j" path="res://scenes/pickable.tscn" id="4_fas5c"]
+
+[node name="TestLevel" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 639.0
+offset_bottom = 321.0
+texture = ExtResource("1_nacug")
+stretch_mode = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = ExtResource("2_x0ir6")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(196617, 196609, 0, 262153, 196609, 1, 196618, 262145, 0, 262154, 262145, 1, 196619, 327681, 0, 262155, 327681, 1, 589824, 65537, 0, 589825, 65537, 0, 589826, 65537, 0, 589827, 65537, 0, 589828, 65537, 0, 589829, 65537, 0, 589830, 65537, 0, 589831, 65537, 0, 589832, 65537, 0, 589833, 65537, 0, 589834, 65537, 0, 589835, 65537, 0, 589836, 65537, 0, 589837, 65537, 0, 589838, 65537, 0, 589839, 65537, 0, 589840, 65537, 0, 589841, 65537, 0, 589842, 65537, 0, 589843, 65537, 0)
+
+[node name="PlayerTest" parent="." instance=ExtResource("3_1bl2l")]
+position = Vector2(142, 245)
+collision_mask = 2
+
+[node name="Pickable" parent="." instance=ExtResource("4_fas5c")]
+position = Vector2(462, 263)

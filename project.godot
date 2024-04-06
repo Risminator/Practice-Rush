@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 
@@ -35,6 +35,13 @@ project/assembly_name="Godot Projects"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Environment"
+2d_physics/layer_3="Misc"
+
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 1)
