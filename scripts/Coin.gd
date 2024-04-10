@@ -4,4 +4,5 @@ extends Area2D
 func _on_body_entered(body):
 	if body.name == "PlayerTest":
 		queue_free()
-		level_manager.decrement()
+		if level_manager != null:
+			level_manager.decrement()
