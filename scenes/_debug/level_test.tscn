@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbuylivkuqql1"]
+[gd_scene load_steps=7 format=3 uid="uid://bbuylivkuqql1"]
 
 [ext_resource type="Texture2D" uid="uid://cxqcahaf8yunp" path="res://assets/temp/tileset/Spritesheet/spritesheet_tiles.png" id="1_tadml"]
 [ext_resource type="PackedScene" uid="uid://c2tc4yovjsigv" path="res://scenes/player_test.tscn" id="2_y44g6"]
 [ext_resource type="PackedScene" uid="uid://feiknu0iud4j" path="res://scenes/pickable.tscn" id="3_4yo1a"]
+[ext_resource type="PackedScene" uid="uid://cn4ufuwknet1o" path="res://scenes/level_manager.tscn" id="4_b0rei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c8kh7"]
 texture = ExtResource("1_tadml")
@@ -402,5 +403,10 @@ layer_0/tile_data = PackedInt32Array(589841, 65536, 8, 589840, 65536, 8, 589839,
 [node name="PlayerTest" parent="." instance=ExtResource("2_y44g6")]
 position = Vector2(273, 505)
 
-[node name="Pickable" parent="." instance=ExtResource("3_4yo1a")]
+[node name="Pickables" type="Node2D" parent="."]
+
+[node name="Pickable" parent="Pickables" instance=ExtResource("3_4yo1a")]
 position = Vector2(839, 515)
+
+[node name="LevelManager" parent="." instance=ExtResource("4_b0rei")]
+unique_name_in_owner = true

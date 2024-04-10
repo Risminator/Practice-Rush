@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cn4ufuwknet1o"]
+
+[ext_resource type="Script" path="res://scenes/_debug/Level.gd" id="1_cr14v"]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource("1_cr14v")
+left_to_beat = 1
+
+[connection signal="condition_satisfied" from="." to="." method="_on_condition_satisfied"]
