@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bbuylivkuqql1"]
 
-[ext_resource type="Texture2D" uid="uid://ce3p5eyhno3cn" path="res://assets/temp/tileset/Spritesheet/spritesheet_tiles.png" id="1_tadml"]
+[ext_resource type="Texture2D" uid="uid://cxqcahaf8yunp" path="res://assets/temp/tileset/Spritesheet/spritesheet_tiles.png" id="1_tadml"]
 [ext_resource type="PackedScene" uid="uid://c2tc4yovjsigv" path="res://scenes/player_test.tscn" id="2_y44g6"]
 [ext_resource type="PackedScene" uid="uid://feiknu0iud4j" path="res://scenes/pickable.tscn" id="3_4yo1a"]
 
@@ -400,5 +400,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(589841, 65536, 8, 589840, 65536, 8, 589839, 65536, 8, 589838, 65536, 8, 589837, 65536, 8, 589836, 65536, 8, 589835, 65536, 8, 589834, 65536, 8, 589833, 65536, 8, 589832, 65536, 8, 589831, 65536, 8, 589830, 65536, 8, 589829, 65536, 8, 589828, 65536, 8, 589827, 65536, 8, 589826, 65536, 8, 589825, 65536, 8, 589824, 65536, 8, 524288, 65536, 8, 458752, 65536, 8, 393216, 65536, 8, 327680, 65536, 8, 262144, 65536, 8, 196608, 65536, 8, 131072, 65536, 8, 65536, 65536, 8, 0, 65536, 8, 1, 65536, 8, 2, 65536, 8, 3, 65536, 8, 4, 65536, 8, 5, 65536, 8, 6, 65536, 8, 7, 65536, 8, 8, 65536, 8, 9, 65536, 8, 10, 65536, 8, 11, 65536, 8, 12, 65536, 8, 13, 65536, 8, 14, 65536, 8, 15, 65536, 8, 16, 65536, 8, 17, 65536, 8, 65553, 65536, 8, 131089, 65536, 8, 196625, 65536, 8, 262161, 65536, 8, 327697, 65536, 8, 393233, 65536, 8, 524305, 65536, 8, 458769, 65536, 8)
 
 [node name="PlayerTest" parent="." instance=ExtResource("2_y44g6")]
+position = Vector2(273, 505)
 
 [node name="Pickable" parent="." instance=ExtResource("3_4yo1a")]
+position = Vector2(839, 515)
