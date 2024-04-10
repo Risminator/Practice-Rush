@@ -15,6 +15,9 @@ func _process(delta):
 func _on_btn_start_pressed():
 	get_tree().change_scene_to_file(Global.SCENES.TEST_LEVEL)
 
+# Опции
+func _on_btn_options_pressed():
+	get_tree().change_scene_to_file(Global.SCENES.OPTIONS)
 
 # Выход из игры
 func _on_btn_exit_pressed():

@@ -71,4 +71,5 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_bxkbd")
 
 [connection signal="pressed" from="BtnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="BtnOptions" to="." method="_on_btn_options_pressed"]
 [connection signal="pressed" from="BtnExit" to="." method="_on_btn_exit_pressed"]
