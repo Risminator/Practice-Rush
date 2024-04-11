@@ -3,6 +3,8 @@ extends CanvasLayer
 @onready var timer = $Timer
 @onready var label = $TimerLabel
 
+signal game_timeout()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	timer.start()
@@ -20,3 +22,5 @@ func _process(delta):
 
 func _on_timer_timeout():
 	timer.stop()
+	game_timeout.emit()
+	

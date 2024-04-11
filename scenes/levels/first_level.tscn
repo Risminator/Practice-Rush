@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c2tc4yovjsigv" path="res://scenes/player_test.tscn" id="3_ilo4g"]
 [ext_resource type="PackedScene" uid="uid://huhohhsk47jj" path="res://scenes/pickable.tscn" id="4_ji7sx"]
 [ext_resource type="Texture2D" uid="uid://qit5l7l773s6" path="res://assets/trees.png" id="4_n385y"]
-[ext_resource type="Script" path="res://scripts/GameTimer.gd" id="9_1wxaw"]
+[ext_resource type="PackedScene" uid="uid://cofbkp8xuj84a" path="res://scenes/game_timer.tscn" id="9_p7yhe"]
 
 [node name="FirstLevel" type="Node2D"]
 texture_filter = 1
@@ -51,35 +51,19 @@ position = Vector2(46, 280)
 [node name="Pickables" type="Node2D" parent="."]
 
 [node name="Pickable" parent="Pickables" instance=ExtResource("4_ji7sx")]
-position = Vector2(390, 292)
+position = Vector2(268, 300)
 
 [node name="Pickable2" parent="Pickables" instance=ExtResource("4_ji7sx")]
 position = Vector2(340, 298)
 
 [node name="Pickable3" parent="Pickables" instance=ExtResource("4_ji7sx")]
-position = Vector2(293, 293)
+position = Vector2(298, 269)
 
 [node name="Pickable4" parent="Pickables" instance=ExtResource("4_ji7sx")]
-position = Vector2(424, 309)
+position = Vector2(229, 288)
 
-[node name="GameTimer" type="CanvasLayer" parent="."]
-script = ExtResource("9_1wxaw")
-
-[node name="TimerLabel" type="Label" parent="GameTimer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "0:00"
-horizontal_alignment = 1
-
-[node name="Timer" type="Timer" parent="GameTimer"]
-wait_time = 5.0
+[node name="GameTimer" parent="." instance=ExtResource("9_p7yhe")]
 
 [connection signal="condition_satisfied" from="LevelManager" to="Exit" method="_on_level_manager_condition_satisfied"]
 [connection signal="body_entered" from="Exit" to="LevelManager" method="_on_exit_body_entered"]
-[connection signal="timeout" from="GameTimer/Timer" to="LevelManager" method="_on_timer_timeout"]
-[connection signal="timeout" from="GameTimer/Timer" to="GameTimer" method="_on_timer_timeout"]
+[connection signal="game_timeout" from="GameTimer" to="LevelManager" method="_on_game_timer_game_timeout"]

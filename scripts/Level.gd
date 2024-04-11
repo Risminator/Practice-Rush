@@ -4,6 +4,7 @@ signal condition_satisfied
 @export var left_to_beat = 0
 
 var is_winnable = true
+var is_condition_satisfied = false
 
 func decrement():
 	left_to_beat -= 1
@@ -11,10 +12,18 @@ func decrement():
 		condition_satisfied.emit()		
 
 func _on_exit_body_entered(body):
-	if is_winnable:
-		Global.go_to_next_level()
+	if is_winnable and is_condition_satisfied:
+		call_deferred("level_won")
 
+func _on_condition_satisfied():
+	is_condition_satisfied = true
 
-func _on_timer_timeout():
+func _on_game_timer_game_timeout():
 	is_winnable = false
+	call_deferred("lose")
+
+func lose():
 	Global.set_scene(Global.MENUS.LOST)
+
+func level_won():
+	Global.go_to_next_level()
