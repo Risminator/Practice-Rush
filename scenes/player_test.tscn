@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2tc4yovjsigv"]
+[gd_scene load_steps=20 format=3 uid="uid://c2tc4yovjsigv"]
 
 [ext_resource type="Script" path="res://scripts/Player_test.gd" id="1_5ju1p"]
-[ext_resource type="Texture2D" uid="uid://dxqq1280yyxyt" path="res://assets/animation.png" id="2_76f8d"]
+[ext_resource type="Texture2D" uid="uid://bh2d6lpwe7q7n" path="res://assets/animation.png" id="2_76f8d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xv203"]
 size = Vector2(31, 57)
@@ -31,7 +31,7 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
@@ -57,12 +57,78 @@ tracks/0/keys = {
 "values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
 }
 
+[sub_resource type="Animation" id="Animation_4601e"]
+resource_name = "idle_left"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2uyxt"]
 _data = {
 "idle": SubResource("Animation_htvjr"),
+"idle_left": SubResource("Animation_4601e"),
 "jump": SubResource("Animation_neqkd"),
 "run": SubResource("Animation_3n76r")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ai4c"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f7msh"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmvvs"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xwm7r"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lf8m3"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1qcha"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u1c0h"]
+advance_mode = 2
+advance_condition = &"is_in_air"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdntn"]
+advance_mode = 2
+advance_condition = &"is_in_air"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_awafq"]
+advance_mode = 2
+advance_condition = &"is_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3on10"]
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_obvsl"]
+states/End/position = Vector2(-110, 1)
+states/Start/position = Vector2(-817, 4)
+states/idle/node = SubResource("AnimationNodeAnimation_0ai4c")
+states/idle/position = Vector2(-638, 4)
+states/jump/node = SubResource("AnimationNodeAnimation_f7msh")
+states/jump/position = Vector2(-541, 121)
+states/run/node = SubResource("AnimationNodeAnimation_gmvvs")
+states/run/position = Vector2(-415, 4)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_xwm7r"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_lf8m3"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1qcha"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_u1c0h"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_fdntn"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_awafq"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_3on10")]
+graph_offset = Vector2(-1480.61, -323.795)
 
 [node name="PlayerTest" type="CharacterBody2D"]
 texture_filter = 1
@@ -78,7 +144,7 @@ shape = SubResource("RectangleShape2D_xv203")
 texture = ExtResource("2_76f8d")
 hframes = 9
 vframes = 3
-frame = 18
+frame = 20
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -88,3 +154,13 @@ libraries = {
 "": SubResource("AnimationLibrary_2uyxt")
 }
 autoplay = "idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2uyxt")
+}
+tree_root = SubResource("AnimationNodeStateMachine_obvsl")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/idle = false
+parameters/conditions/is_in_air = false
+parameters/conditions/is_moving = false

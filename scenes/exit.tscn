@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckrthe8uimgvg"]
+
+[ext_resource type="Script" path="res://scripts/exit.gd" id="1_idkn8"]
+[ext_resource type="Texture2D" uid="uid://cpovae4aamhyj" path="res://assets/candle.png" id="1_t7r1m"]
+[ext_resource type="Texture2D" uid="uid://blrfbs5bda46c" path="res://assets/particles.png" id="2_48vkj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dx7ik"]
+size = Vector2(43, 49)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gr5vs"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5p10l"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 1)
+inherit_velocity_ratio = 20.0
+direction = Vector3(1, -1, 0)
+gravity = Vector3(0, -60, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="Exit" type="Area2D"]
+script = ExtResource("1_idkn8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 7.5)
+shape = SubResource("RectangleShape2D_dx7ik")
+
+[node name="VisibleParts" type="CanvasGroup" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+texture = ExtResource("1_t7r1m")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.996078, 0.94902, 0.831373, 0.509804)
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_gr5vs")
+position = Vector2(0, 32)
+scale = Vector2(0.5, 0.5)
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_5p10l")
+texture = ExtResource("2_48vkj")
