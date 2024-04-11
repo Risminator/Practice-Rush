@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://5iqi0eclxq8a"]
+[gd_scene load_steps=8 format=3 uid="uid://diyuylwbcecwg"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_3w8i8"]
-[ext_resource type="Texture2D" uid="uid://p06tnp57beox" path="res://assets/sprite.png" id="2_msouy"]
-[ext_resource type="PackedScene" uid="uid://ctt0qlkn75itl" path="res://scenes/system.tscn" id="2_o76ol"]
-[ext_resource type="Texture2D" uid="uid://brhhdk6snckd" path="res://assets/logo.png" id="3_g67qt"]
-[ext_resource type="Texture2D" uid="uid://blrfbs5bda46c" path="res://assets/particles.png" id="4_qgofs"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_jpwig"]
+[ext_resource type="PackedScene" uid="uid://ctt0qlkn75itl" path="res://scenes/system.tscn" id="2_enjc8"]
+[ext_resource type="Texture2D" uid="uid://p06tnp57beox" path="res://assets/sprite.png" id="3_s5nj6"]
+[ext_resource type="Texture2D" uid="uid://blrfbs5bda46c" path="res://assets/particles.png" id="4_47xnp"]
+[ext_resource type="Texture2D" uid="uid://brhhdk6snckd" path="res://assets/logo.png" id="5_undy5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3oldc"]
 particles_animation = true
@@ -25,9 +25,9 @@ anim_speed_min = 1.0
 anim_speed_max = 1.0
 
 [node name="Main" type="Node"]
-script = ExtResource("1_3w8i8")
+script = ExtResource("1_jpwig")
 
-[node name="System" parent="." instance=ExtResource("2_o76ol")]
+[node name="System" parent="." instance=ExtResource("2_enjc8")]
 
 [node name="Background" type="TextureRect" parent="."]
 self_modulate = Color(0.333333, 0.321569, 0.486275, 1)
@@ -40,7 +40,7 @@ offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
-texture = ExtResource("2_msouy")
+texture = ExtResource("3_s5nj6")
 stretch_mode = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
@@ -51,7 +51,7 @@ position = Vector2(318, 192)
 scale = Vector2(0.5, 0.5)
 amount = 128
 process_material = SubResource("ParticleProcessMaterial_ubffn")
-texture = ExtResource("4_qgofs")
+texture = ExtResource("4_47xnp")
 
 [node name="Logo" type="TextureRect" parent="."]
 texture_filter = 1
@@ -64,7 +64,7 @@ offset_right = 647.0
 offset_bottom = 171.0
 grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_g67qt")
+texture = ExtResource("5_undy5")
 
 [node name="Buttons" type="Control" parent="."]
 texture_filter = 1

@@ -1,9 +1,10 @@
 extends Node
 
 const MENUS = {
-	MAIN = "main",
-	OPTIONS = "options",
-	ENDING = "ending"
+	MAIN = "menus/main",
+	OPTIONS = "menus/options",
+	ENDING = "menus/ending",
+	LOST = "menus/lost"
 }
 
 const levels_dict = {
@@ -28,7 +29,7 @@ func set_level_id(level_id: int):
 	set_scene(get_level_by_id(level_id))
 
 func go_to_next_level():
-	if current_level_id + 1 < levels_count:
+	if current_level_id < levels_count:
 		set_level_id(current_level_id + 1)
 	else:
 		set_scene(MENUS.ENDING)

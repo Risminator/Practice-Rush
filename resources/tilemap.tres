@@ -1,6 +1,10 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bjltml1nn5u2d"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bjltml1nn5u2d"]
 
+[ext_resource type="PackedScene" uid="uid://huhohhsk47jj" path="res://scenes/pickable.tscn" id="1_bxvsx"]
 [ext_resource type="Texture2D" uid="uid://dfiufv3ajv2o0" path="res://assets/tiles.png" id="1_p42qk"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_j8qy8"]
+scenes/2/scene = ExtResource("1_bxvsx")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eo6u4"]
 texture = ExtResource("1_p42qk")
@@ -83,3 +87,4 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 2
 physics_layer_1/collision_layer = 4
 sources/1 = SubResource("TileSetAtlasSource_eo6u4")
+sources/0 = SubResource("TileSetScenesCollectionSource_j8qy8")

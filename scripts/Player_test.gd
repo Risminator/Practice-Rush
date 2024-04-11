@@ -35,9 +35,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-	#var isLeft = velocity.x < 0
-	#$Sprite2D.flip_h = isLeft
-	
 func update_animation_parameters():
 	animation_tree.set("parameters/conditions/idle", velocity == Vector2.ZERO && is_on_floor())
 	animation_tree.set("parameters/conditions/is_moving", velocity != Vector2.ZERO && is_on_floor())
