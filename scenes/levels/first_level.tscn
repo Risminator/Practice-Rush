@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://c13qqy5ome51x"]
+[gd_scene load_steps=9 format=3 uid="uid://6kf3l1x1psq2"]
 
-[ext_resource type="PackedScene" uid="uid://ctt0qlkn75itl" path="res://scenes/system.tscn" id="1_1rsyn"]
+[ext_resource type="PackedScene" uid="uid://4jwxk6qj40bs" path="res://scenes/system.tscn" id="1_1rsyn"]
 [ext_resource type="TileSet" uid="uid://bjltml1nn5u2d" path="res://resources/tilemap.tres" id="2_0mr3k"]
 [ext_resource type="PackedScene" uid="uid://c2tc4yovjsigv" path="res://scenes/player_test.tscn" id="3_ilo4g"]
-[ext_resource type="PackedScene" uid="uid://feiknu0iud4j" path="res://scenes/pickable.tscn" id="4_ji7sx"]
+[ext_resource type="PackedScene" uid="uid://huhohhsk47jj" path="res://scenes/pickable.tscn" id="4_ji7sx"]
+[ext_resource type="Texture2D" uid="uid://c3hj5xrqcmjnt" path="res://assets/candle.png" id="5_oiry2"]
+[ext_resource type="Texture2D" uid="uid://ckiphkagxdkm5" path="res://assets/particles.png" id="6_2emey"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ns6jk"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7a4v6"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 1)
+inherit_velocity_ratio = 20.0
+direction = Vector3(1, -1, 0)
+gravity = Vector3(0, -60, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="FirstLevel" type="Node2D"]
 
@@ -31,3 +50,18 @@ position = Vector2(272, 233)
 
 [node name="Pickable4" parent="Pickables" instance=ExtResource("4_ji7sx")]
 position = Vector2(626, 71)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(341, 0)
+texture = ExtResource("5_oiry2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.996078, 0.94902, 0.831373, 0.509804)
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ns6jk")
+position = Vector2(343, 32)
+scale = Vector2(0.5, 0.5)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_7a4v6")
+texture = ExtResource("6_2emey")

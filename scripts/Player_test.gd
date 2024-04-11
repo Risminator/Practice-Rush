@@ -12,6 +12,11 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+		$AnimationPlayer.play("jump")
+	elif velocity.length() == 0:
+		$AnimationPlayer.play("idle")
+	else:
+		$AnimationPlayer.play("run")
 
 	# Handle jump.
 	if Input.is_action_just_pressed("move_up") and is_on_floor():
@@ -26,3 +31,8 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
+	var isLeft = velocity.x < 0
+	$Sprite2D.flip_h = isLeft
+	
+

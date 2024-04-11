@@ -1,10 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://feiknu0iud4j"]
+[gd_scene load_steps=6 format=3 uid="uid://huhohhsk47jj"]
 
 [ext_resource type="Script" path="res://scripts/Coin.gd" id="1_cc3lw"]
-[ext_resource type="Texture2D" uid="uid://ctqipytcc6nh5" path="res://assets/collect.png" id="2_7l024"]
+[ext_resource type="Texture2D" uid="uid://c6lf5adionojj" path="res://assets/collect.png" id="2_7l024"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jdvpu"]
 radius = 14.0
+
+[sub_resource type="Animation" id="Animation_2ih43"]
+resource_name = "pupum"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ej2a8"]
+_data = {
+"pupum": SubResource("Animation_2ih43")
+}
 
 [node name="Pickable" type="Area2D"]
 texture_filter = 1
@@ -16,5 +38,12 @@ shape = SubResource("CircleShape2D_jdvpu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_7l024")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ej2a8")
+}
+autoplay = "pupum"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
