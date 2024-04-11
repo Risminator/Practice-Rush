@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://5iqi0eclxq8a"]
+[gd_scene load_steps=8 format=3 uid="uid://5iqi0eclxq8a"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_3w8i8"]
-[ext_resource type="Texture2D" uid="uid://ovcr8o6hwxda" path="res://assets/sprite.png" id="2_msouy"]
-[ext_resource type="Texture2D" uid="uid://crv21phv4a6lu" path="res://assets/logo.png" id="3_g67qt"]
-[ext_resource type="Texture2D" uid="uid://ckiphkagxdkm5" path="res://assets/particles.png" id="4_qgofs"]
+[ext_resource type="Texture2D" uid="uid://p06tnp57beox" path="res://assets/sprite.png" id="2_msouy"]
+[ext_resource type="PackedScene" uid="uid://ctt0qlkn75itl" path="res://scenes/system.tscn" id="2_o76ol"]
+[ext_resource type="Texture2D" uid="uid://brhhdk6snckd" path="res://assets/logo.png" id="3_g67qt"]
+[ext_resource type="Texture2D" uid="uid://blrfbs5bda46c" path="res://assets/particles.png" id="4_qgofs"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3oldc"]
 particles_animation = true
@@ -25,6 +26,8 @@ anim_speed_max = 1.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_3w8i8")
+
+[node name="System" parent="." instance=ExtResource("2_o76ol")]
 
 [node name="Background" type="TextureRect" parent="."]
 self_modulate = Color(0.333333, 0.321569, 0.486275, 1)
@@ -50,48 +53,6 @@ amount = 128
 process_material = SubResource("ParticleProcessMaterial_ubffn")
 texture = ExtResource("4_qgofs")
 
-[node name="BtnStart" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = -44.0
-offset_right = 89.0
-offset_bottom = -13.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Start"
-
-[node name="BtnOptions" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = 1.0
-offset_right = 89.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Options"
-
-[node name="BtnExit" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = 46.0
-offset_right = 89.0
-offset_bottom = 77.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Exit"
-
 [node name="Logo" type="TextureRect" parent="."]
 texture_filter = 1
 anchors_preset = 5
@@ -105,6 +66,58 @@ grow_horizontal = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_g67qt")
 
-[connection signal="pressed" from="BtnStart" to="." method="_on_btn_start_pressed"]
-[connection signal="pressed" from="BtnOptions" to="." method="_on_btn_options_pressed"]
-[connection signal="pressed" from="BtnExit" to="." method="_on_btn_exit_pressed"]
+[node name="Buttons" type="Control" parent="."]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BtnStart" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 212.0
+offset_top = 96.0
+offset_right = 389.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+
+[node name="BtnOptions" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 212.0
+offset_top = 141.0
+offset_right = 389.0
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Options"
+
+[node name="BtnExit" type="Button" parent="Buttons"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 212.0
+offset_top = 186.0
+offset_right = 389.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+
+[connection signal="pressed" from="Buttons/BtnStart" to="." method="_on_btn_start_pressed"]
+[connection signal="pressed" from="Buttons/BtnOptions" to="." method="_on_btn_options_pressed"]
+[connection signal="pressed" from="Buttons/BtnExit" to="." method="_on_btn_exit_pressed"]
