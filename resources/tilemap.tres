@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://bjltml1nn5u2d"]
 
 [ext_resource type="PackedScene" uid="uid://huhohhsk47jj" path="res://scenes/pickable.tscn" id="1_bxvsx"]
-[ext_resource type="Texture2D" uid="uid://dfiufv3ajv2o0" path="res://assets/tiles.png" id="1_p42qk"]
+[ext_resource type="Texture2D" uid="uid://dtgqd01qp7f2d" path="res://assets/tiles.png" id="1_p42qk"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_j8qy8"]
 scenes/2/scene = ExtResource("1_bxvsx")
@@ -83,7 +83,7 @@ texture_region_size = Vector2i(32, 32)
 3:2/0/physics_layer_1/angular_velocity = 0.0
 
 [resource]
-tile_size = Vector2i(32, 32)
+tile_size = Vector2i(32, 16)
 physics_layer_0/collision_layer = 2
 physics_layer_1/collision_layer = 4
 sources/1 = SubResource("TileSetAtlasSource_eo6u4")
