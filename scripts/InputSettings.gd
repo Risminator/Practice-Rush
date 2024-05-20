@@ -66,4 +66,7 @@ func _update_action_list(button, event):
 
 
 func _on_exit_pressed():
-	get_tree().quit()
+	return_to_main.call_deferred()
+
+func return_to_main():
+	Global.set_scene(Global.MENUS.MAIN)

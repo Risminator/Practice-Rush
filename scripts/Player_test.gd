@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var dash_timer: Timer = $DashTimer
 @onready var ghost_timer: Timer = $GhostTimer
-@onready var raycast: RayCast2D = $RightCast2D
+@onready var raycast: RayCast2D = $RayCast2D
 const dash_ghost: PackedScene = preload("res://scenes/dash_ghost.tscn")
 
 
@@ -19,8 +19,8 @@ const dash_ghost: PackedScene = preload("res://scenes/dash_ghost.tscn")
 @onready var fall_gravity: float = (2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)
 
 @export var max_speed: float = 400.0
-@export var accel: float = 750.0
-@export var friction: float = 500.0
+@export var accel: float = 1250.0
+@export var friction: float = 1250.0
 @export var dash_speed: float = 600.0
 
 var jump_buffer_counter: int = 0
@@ -64,9 +64,8 @@ func _physics_process(delta):
 	if Input.is_action_just_released("move_up") and velocity.y < 0.0:
 		velocity.y *= 0.4
 	
-	is_crouching = is_on_floor() && Input.is_action_pressed("crouch") && !is_dashing
+	
 	var direction = Input.get_axis("move_left", "move_right") if !is_crouching else 0.0
-
 	if direction and !is_dashing:
 		sprite.scale.x = direction
 		velocity.x += direction * accel * delta
@@ -97,6 +96,7 @@ func instance_ghost():
 	var ghost: Sprite2D = dash_ghost.instantiate()
 	ghost.global_position = global_position
 	ghost.texture = sprite.texture
+	ghost.offset = sprite.offset
 	ghost.vframes = sprite.vframes
 	ghost.hframes = sprite.hframes
 	ghost.frame = sprite.frame
@@ -109,9 +109,9 @@ func _on_dash_timer_timeout():
 	ghost_timer.stop()
 
 func update_animation_parameters():
-	animation_tree.set("parameters/conditions/is_crouching", is_crouching)
-	animation_tree.set("parameters/conditions/is_idle", velocity == Vector2.ZERO && is_on_floor() && !is_dashing && !is_crouching)
-	animation_tree.set("parameters/conditions/is_moving", velocity != Vector2.ZERO && is_on_floor() && !is_dashing && !is_crouching)
+	animation_tree.set("parameters/conditions/is_crouching", is_on_floor() && velocity == Vector2.ZERO && !is_dashing && Input.is_action_pressed("crouch"))
+	animation_tree.set("parameters/conditions/is_idle", is_on_floor() && velocity == Vector2.ZERO && !is_dashing && !Input.is_action_pressed("crouch"))
+	animation_tree.set("parameters/conditions/is_moving", is_on_floor() && velocity != Vector2.ZERO && !is_dashing)
 	animation_tree.set("parameters/conditions/is_in_air", !is_on_floor() && !is_dashing)
 	animation_tree.set("parameters/conditions/is_dashing", is_dashing && !is_crouching)
 
