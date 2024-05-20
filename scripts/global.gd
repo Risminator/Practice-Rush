@@ -8,10 +8,10 @@ const MENUS = {
 }
 
 const levels_dict = {
-	1: "first_level",
-	2: "second_level",
-	3: "third_level",
-	4: "fourth_level"
+	1: "1",
+	2: "2",
+	3: "3",
+	4: "4"
 }
 
 var levels_count = levels_dict.size()
@@ -28,7 +28,7 @@ func set_level_id(level_id: int):
 	current_level_id = level_id
 	set_scene(get_level_by_id(level_id))
 
-func go_to_nex_level():
+func go_to_next_level():
 	if current_level_id < levels_count:
 		set_level_id(current_level_id + 1)
 	else:
