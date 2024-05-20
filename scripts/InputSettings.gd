@@ -7,7 +7,8 @@ extends Control
 var input_actions = {
 	"move_left" : "Move Left",
 	"move_right" : "Move Right",
-	"move_up" : "Jump"
+	"move_up" : "Jump",
+	"dash" : "Dash"
 }
 var is_remapping = false
 var action_to_remap = null
@@ -65,4 +66,4 @@ func _update_action_list(button, event):
 
 
 func _on_exit_pressed():
-	get_tree().change_scene_to_file(Global.SCENES.MAIN)
+	get_tree().quit()

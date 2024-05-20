@@ -6,7 +6,7 @@ func _on_btn_start_pressed():
 
 # Опции
 func _on_btn_options_pressed():
-	Global.set_level(Global.MENUS.OPTIONS)
+	Global.set_scene(Global.MENUS.OPTIONS)
 
 # Выход из игры
 func _on_btn_exit_pressed():
