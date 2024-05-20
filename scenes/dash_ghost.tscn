@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4ba1mf557v36"]
+
+[ext_resource type="Script" path="res://scenes/dash_ghost.gd" id="1_dxss4"]
+[ext_resource type="Shader" path="res://resources/dash_ghost.gdshader" id="1_r7qhx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dc0iw"]
+shader = ExtResource("1_r7qhx")
+shader_parameter/tint = true
+shader_parameter/color = Vector3(0.5, 0.8, 1)
+shader_parameter/mix_weight = 1.0
+
+[node name="DashGhost" type="Sprite2D"]
+top_level = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_dc0iw")
+script = ExtResource("1_dxss4")

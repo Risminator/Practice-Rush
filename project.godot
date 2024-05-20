@@ -74,3 +74,5 @@ dash={
 
 renderer/rendering_method="mobile"
 environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 1)
+2d/sdf/oversize=0
+2d/sdf/scale=2
