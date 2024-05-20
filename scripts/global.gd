@@ -28,7 +28,7 @@ func set_level_id(level_id: int):
 	current_level_id = level_id
 	set_scene(get_level_by_id(level_id))
 
-func go_to_next_level():
+func go_to_nex_level():
 	if current_level_id < levels_count:
 		set_level_id(current_level_id + 1)
 	else:

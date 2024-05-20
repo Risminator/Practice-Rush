@@ -1,6 +1,5 @@
-[gd_scene load_steps=12 format=3 uid="uid://6kf3l1x1psq2"]
+[gd_scene load_steps=11 format=3 uid="uid://6kf3l1x1psq2"]
 
-[ext_resource type="PackedScene" uid="uid://ctt0qlkn75itl" path="res://scenes/system.tscn" id="1_1rsyn"]
 [ext_resource type="PackedScene" uid="uid://cn4ufuwknet1o" path="res://scenes/level_manager.tscn" id="2_7xqip"]
 [ext_resource type="PackedScene" uid="uid://ckrthe8uimgvg" path="res://scenes/exit.tscn" id="3_cpkjs"]
 [ext_resource type="Texture2D" uid="uid://dssh5ew3k4ypb" path="res://assets/background.png" id="3_g2ry1"]
@@ -125,8 +124,6 @@ sources/0 = SubResource("TileSetAtlasSource_3mble")
 
 [node name="FirstLevel" type="Node2D"]
 texture_filter = 1
-
-[node name="System" parent="." instance=ExtResource("1_1rsyn")]
 
 [node name="LevelManager" parent="." instance=ExtResource("2_7xqip")]
 unique_name_in_owner = true

@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0r2r1myifcpt"]
+[gd_scene load_steps=9 format=3 uid="uid://d0r2r1myifcpt"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_1vy4c"]
-[ext_resource type="PackedScene" uid="uid://ctt0qlkn75itl" path="res://scenes/system.tscn" id="2_3y8jw"]
 [ext_resource type="Texture2D" uid="uid://blrfbs5bda46c" path="res://assets/particles.png" id="4_iiavc"]
 [ext_resource type="Texture2D" uid="uid://cwj4yi77kb8dh" path="res://assets/cover/cover1.png" id="5_50no3"]
 [ext_resource type="Texture2D" uid="uid://cgxysn3ovhs7o" path="res://assets/cover/cover2.png" id="6_nqh1j"]
@@ -52,8 +51,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("AnimatedTexture_il5vb")
-
-[node name="System" parent="." instance=ExtResource("2_3y8jw")]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(0.870588, 0.584314, 0.92549, 0.105882)
