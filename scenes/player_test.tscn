@@ -269,11 +269,11 @@ advance_condition = &"is_crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6myyb"]
 advance_mode = 2
-advance_condition = &"stopped_crouching"
+advance_condition = &"is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_26lv3"]
 advance_mode = 2
-advance_condition = &"stopped_crouching"
+advance_condition = &"is_moving"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t4ptq"]
 advance_mode = 2
@@ -342,12 +342,14 @@ metadata/_edit_group_ = true
 
 [node name="StandCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xv203")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_25sbf")
 offset = Vector2(-1, -4)
 hframes = 17
 vframes = 4
+frame = 52
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 libraries = {
@@ -357,10 +359,9 @@ tree_root = SubResource("AnimationNodeStateMachine_obvsl")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/is_crouching = false
 parameters/conditions/is_dashing = false
-parameters/conditions/is_idle = true
+parameters/conditions/is_idle = false
 parameters/conditions/is_in_air = false
 parameters/conditions/is_moving = false
-parameters/conditions/stopped_crouching = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -370,7 +371,6 @@ libraries = {
 [node name="CrouchCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_ldypt")
-disabled = true
 
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.3

@@ -65,8 +65,7 @@ func _physics_process(delta):
 		velocity.y *= 0.4
 	
 	is_crouching = is_on_floor() && Input.is_action_pressed("crouch") && !is_dashing
-	
-	var direction = Input.get_axis("move_left", "move_right") if !is_crouching else 0
+	var direction = Input.get_axis("move_left", "move_right") if !is_crouching else 0.0
 
 	if direction and !is_dashing:
 		sprite.scale.x = direction
@@ -78,6 +77,7 @@ func _physics_process(delta):
 		else:
 			velocity.x = 0
 	else:
+		is_crouching = false
 		velocity.y = 0
 		velocity.x = sign(sprite.scale.x) * dash_speed
 	
@@ -110,11 +110,10 @@ func _on_dash_timer_timeout():
 
 func update_animation_parameters():
 	animation_tree.set("parameters/conditions/is_crouching", is_crouching)
-	animation_tree.set("parameters/conditions/stopped_crouching", !Input.is_action_pressed("crouch"))
-	animation_tree.set("parameters/conditions/is_idle", velocity == Vector2.ZERO && is_on_floor() && !is_dashing)
-	animation_tree.set("parameters/conditions/is_moving", velocity != Vector2.ZERO && is_on_floor() && !is_dashing)
+	animation_tree.set("parameters/conditions/is_idle", velocity == Vector2.ZERO && is_on_floor() && !is_dashing && !is_crouching)
+	animation_tree.set("parameters/conditions/is_moving", velocity != Vector2.ZERO && is_on_floor() && !is_dashing && !is_crouching)
 	animation_tree.set("parameters/conditions/is_in_air", !is_on_floor() && !is_dashing)
-	animation_tree.set("parameters/conditions/is_dashing", is_dashing)
+	animation_tree.set("parameters/conditions/is_dashing", is_dashing && !is_crouching)
 
 
 func _on_ghost_timer_timeout():
