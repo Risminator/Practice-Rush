@@ -1,30 +1,30 @@
 extends Node
 
-signal condition_satisfied
 @onready var left_to_beat = get_tree().get_nodes_in_group("PICKABLE").size()
+@onready var black_screen: AnimationPlayer = $CanvasLayer/ColorRect/AnimationPlayer
 
 var is_winnable = true
-var is_condition_satisfied = false
 
+func _ready():
+	Events.player_death.connect(_on_player_death)
+	Events.pickable_collected.connect(_on_pickable_collected)
 
-func decrement():
+func _on_pickable_collected():
 	left_to_beat -= 1
-	if (left_to_beat <= 0):
-		condition_satisfied.emit()		
+	if left_to_beat <= 0 and is_winnable:
+		Events.condition_satisfied.emit()
 
-func _on_exit_body_entered(_body):
-	if is_winnable and is_condition_satisfied:
-		call_deferred("level_won")
-
-func _on_condition_satisfied():
-	is_condition_satisfied = true
 
 func _on_game_timer_game_timeout():
 	is_winnable = false
-	call_deferred("lose")
+	lose.call_deferred()
+
+func _on_player_death():
+	lose()
 
 func lose():
-	Global.set_scene(Global.MENUS.LOST)
+	black_screen.play("fade_in")
+	get_tree().reload_current_scene()
 
 func level_won():
 	Global.go_to_next_level()

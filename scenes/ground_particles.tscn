@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnuiu7e0xewgq"]
+
+[ext_resource type="Texture2D" uid="uid://ckvu4p84278a6" path="res://assets/landing/landing1.png" id="1_vdicl"]
+[ext_resource type="Texture2D" uid="uid://3wykjdrj3hwp" path="res://assets/landing/landing2.png" id="2_aai4o"]
+[ext_resource type="Texture2D" uid="uid://espdwsx64x1o" path="res://assets/landing/landing3.png" id="3_a742q"]
+[ext_resource type="Texture2D" uid="uid://crkeqtfjtp24h" path="res://assets/landing/landing4.png" id="4_jlhh1"]
+[ext_resource type="Texture2D" uid="uid://c2ae2aebltcb3" path="res://assets/landing/landing5.png" id="5_mnpj4"]
+[ext_resource type="Script" path="res://scripts/ground_particles.gd" id="6_ychm7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m70mk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_vdicl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aai4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_a742q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jlhh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mnpj4")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_2atfg"]
+resource_name = "fade"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.698039), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54h8o"]
+_data = {
+"fade": SubResource("Animation_2atfg")
+}
+
+[node name="GroundParticles" type="AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_m70mk")
+autoplay = "default"
+script = ExtResource("6_ychm7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_54h8o")
+}
+autoplay = "fade"
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

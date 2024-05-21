@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4ba1mf557v36"]
 
-[ext_resource type="Script" path="res://scenes/dash_ghost.gd" id="1_dxss4"]
+[ext_resource type="Script" path="res://scripts/dash_ghost.gd" id="1_dxss4"]
 [ext_resource type="Shader" path="res://resources/dash_ghost.gdshader" id="1_r7qhx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dc0iw"]

@@ -9,9 +9,7 @@ const MENUS = {
 
 const levels_dict = {
 	1: "1",
-	2: "2",
-	3: "3",
-	4: "4"
+	2: "2"
 }
 
 var levels_count = levels_dict.size()

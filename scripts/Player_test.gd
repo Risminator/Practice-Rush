@@ -4,9 +4,9 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var dash_timer: Timer = $DashTimer
 @onready var ghost_timer: Timer = $GhostTimer
-@onready var raycast: RayCast2D = $RayCast2D
+@onready var marker: Marker2D = $Marker2D
 const dash_ghost: PackedScene = preload("res://scenes/dash_ghost.tscn")
-
+const ground_particles: PackedScene = preload("res://scenes/ground_particles.tscn")
 
 @export var jump_height: float = 125
 @export var jump_time_to_peak: float = 0.5
@@ -23,12 +23,15 @@ const dash_ghost: PackedScene = preload("res://scenes/dash_ghost.tscn")
 @export var friction: float = 1250.0
 @export var dash_speed: float = 600.0
 
+var is_controllable: bool = true
+
 var jump_buffer_counter: int = 0
 var coyote_counter: int = 0
 
 var is_dashing: bool = false
 var is_crouching: bool = false
 var can_dash: bool = true
+var is_grounded: bool = true
 
 var left_ray_input: bool = false
 var right_ray_input: bool = false
@@ -45,8 +48,18 @@ func jump():
 
 
 func _physics_process(delta):
+	if !is_grounded and is_on_floor():
+		var instance = ground_particles.instantiate()
+		instance.global_position = marker.global_position
+		add_sibling(instance)
+	is_grounded = is_on_floor()
 	update_animation_parameters()
-	if is_on_floor():
+	if is_controllable:
+		move(delta)
+
+
+func move(delta):
+	if is_grounded:
 		coyote_counter = coyote_time
 		can_dash = true
 	else:
@@ -109,12 +122,23 @@ func _on_dash_timer_timeout():
 	ghost_timer.stop()
 
 func update_animation_parameters():
-	animation_tree.set("parameters/conditions/is_crouching", is_on_floor() && velocity == Vector2.ZERO && !is_dashing && Input.is_action_pressed("crouch"))
-	animation_tree.set("parameters/conditions/is_idle", is_on_floor() && velocity == Vector2.ZERO && !is_dashing && !Input.is_action_pressed("crouch"))
-	animation_tree.set("parameters/conditions/is_moving", is_on_floor() && velocity != Vector2.ZERO && !is_dashing)
-	animation_tree.set("parameters/conditions/is_in_air", !is_on_floor() && !is_dashing)
+	animation_tree.set("parameters/conditions/is_crouching", is_grounded && velocity == Vector2.ZERO && !is_dashing && Input.is_action_pressed("crouch"))
+	animation_tree.set("parameters/conditions/is_idle", is_grounded && velocity == Vector2.ZERO && !is_dashing && !Input.is_action_pressed("crouch"))
+	animation_tree.set("parameters/conditions/is_moving", is_grounded && velocity != Vector2.ZERO && !is_dashing)
+	animation_tree.set("parameters/conditions/is_in_air", !is_grounded && !is_dashing)
 	animation_tree.set("parameters/conditions/is_dashing", is_dashing && !is_crouching)
 
 
 func _on_ghost_timer_timeout():
 	instance_ghost()
+
+
+func _on_hitbox_body_entered(_body):
+	is_controllable = false
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate:a", 0, 0.3)
+	tween.tween_callback(die)
+	tween.tween_callback(queue_free)
+
+func die():
+	Events.player_death.emit()

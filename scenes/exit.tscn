@@ -30,6 +30,7 @@ script = ExtResource("1_idkn8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_dx7ik")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -45,3 +46,5 @@ scale = Vector2(0.5, 0.5)
 amount = 2
 process_material = SubResource("ParticleProcessMaterial_5p10l")
 texture = ExtResource("2_48vkj")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
