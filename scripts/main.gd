@@ -1,5 +1,13 @@
 extends Node
 
+@onready var btn_exit: Button = $Buttons/BtnExit
+
+func _ready():
+	if OS.has_feature("web"):
+		btn_exit.clip_text = true
+		btn_exit.disabled = true
+		btn_exit.visible = false
+
 # Запуск игры
 func _on_btn_start_pressed():
 	Global.set_level_id(1)
